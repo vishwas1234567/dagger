@@ -41,7 +41,7 @@ For example:
 ```java
 @HiltAndroidTest
 public class FooTest {
-  @Rule HiltAndroidRule rule = new HiltAndroidRule(this);
+  @Rule public HiltAndroidRule rule = new HiltAndroidRule(this);
   ...
 }
 ```
