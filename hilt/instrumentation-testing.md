@@ -35,7 +35,7 @@ public final class MyTestRunner extends AndroidJUnitRunner {
 ```kotlin
 package my.pkg
 
-class MyTestRunner extends AndroidJUnitRunner {
+class MyTestRunner: AndroidJUnitRunner() {
   override fun newApplication(
       cl: ClassLoader,
       appName: String,
