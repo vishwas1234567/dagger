@@ -41,7 +41,7 @@ For example:
 ```java
 @HiltAndroidTest
 public class FooTest {
-  @Rule public HiltAndroidRule rule = new HiltAndroidRule(this);
+  @Rule HiltAndroidRule hiltRule = new HiltAndroidRule(this);
   ...
 }
 ```
@@ -49,7 +49,7 @@ public class FooTest {
 ```kotlin
 @HiltAndroidTest
 class FooTest {
-  @get:Rule val rule = HiltAndroidRule(this)
+  @get:Rule val hiltRule = HiltAndroidRule(this)
   ...
 }
 ```
