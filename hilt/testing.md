@@ -41,7 +41,7 @@ For example:
 ```java
 @HiltAndroidTest
 public class FooTest {
-  @Rule HiltAndroidRule hiltRule = new HiltAndroidRule(this);
+  @Rule public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
   ...
 }
 ```
@@ -85,7 +85,7 @@ An `SingletonComponent` binding can be injected directly into a test using an
 ```java
 @HiltAndroidTest
 class FooTest {
-  @Rule HiltAndroidRule hiltRule = new HiltAndroidRule(this);
+  @Rule public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
 
   @Inject Foo foo;
 
@@ -495,10 +495,10 @@ to specify the order instead.
 @HiltAndroidTest
 public class FooTest {
   // Ensures that the Hilt component is initialized before running the ActivityScenarioRule
-  @Rule(order = 0) HiltAndroidRule hiltRule = new HiltAndroidRule(this);
+  @Rule(order = 0) public HiltAndroidRule hiltRule = new HiltAndroidRule(this);
 
   @Rule(order = 1)
-  ActivityScenarioRule scenarioRule =
+  public ActivityScenarioRule scenarioRule =
       new ActivityScenarioRule(MyActivity.class);
 }
 ```
