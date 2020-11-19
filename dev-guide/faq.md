@@ -80,6 +80,40 @@ final class HttpServletRequestModule {
 }
 ```
 
+## Can `@IntoSet` and `@IntoMap` be applied to `@Inject` constructors?
+
+Unfortunately not. There are a number of API and implementation issues that
+prevent features like this.
+
+First, `@Inject` is an API standard defined outside of Dagger. Code written with
+`@Inject` can and often is reused across code that uses Dagger, Guice, and other
+dependencies injection frameworks. It is important that bindings defined with
+`@Inject` are consistent across all of the frameworks.
+
+Specifying multibinding annotations on `@Inject` constructors would be awkward
+at best for binding subtypes, especially ones with type parameters.
+
+There is also no mechanism for removing `@Inject` bindings since they are
+implicitly discovered, unlike other Dagger bindings that are explicitly declared
+in specified modules. Applications that use Dagger typically assemble multiple
+configurations, each with different bindings. Having multibindings on `@Inject`
+constructors would provide no way to exclude the binding from a particular
+configuration.
+
+To understand why implementing such a feature would be impractical, even if the
+above issues were addressed, it's helpful to understand how Dagger assembles the
+dependency graph. Dagger does a traversal of all of the bindings in modules to
+discover if any bindings satisfy a particular request. Only after Dagger
+examines each module and still cannot find an appropriate binding does it then
+check for the presence of `@Inject` constructors. When doing so, Dagger looks at
+the _exact_ class of the requested type. (This is why `@Inject` constructors are
+sometimes called "just in time" bindings.)
+
+If `@Inject` constructors were allowed to contribute directly to multibindings,
+Dagger would have to do a scan of the entire classpath in order to discover
+which `@Inject` constructors would apply to a multibinding. Even for moderately
+sized applications, this would greatly degrade compile-time performance.
+
 ## Performance & Monitoring
 
 ### How do I add tracing to my components?
