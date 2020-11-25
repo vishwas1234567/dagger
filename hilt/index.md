@@ -3,8 +3,8 @@ layout: default
 title: Hilt
 ---
 
-Hilt provides a standard way to incorporate Dagger dependency injection into
-an Android application.
+Hilt provides a standard way to incorporate Dagger
+dependency injection into an Android application.
 
 *The goals of Hilt are:*
 
