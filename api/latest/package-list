@@ -7,6 +7,7 @@ dagger.grpc.server.processor
 dagger.hilt
 dagger.hilt.android
 dagger.hilt.android.components
+dagger.hilt.android.lifecycle
 dagger.hilt.android.migration
 dagger.hilt.android.qualifiers
 dagger.hilt.android.scopes
