@@ -97,8 +97,9 @@
 <pre>public interface <span class="typeNameLabel">ViewModelComponent</span></pre>
 <div class="block">A Hilt component that has the lifetime of a single <code>ViewModel</code>.
 
- <p>This Hilt component is the source of <a href="../../../../dagger/hilt/android/lifecycle/ViewModelInject.html" title="annotation in dagger.hilt.android.lifecycle"><code>ViewModelInject</code></a>-annotated <code>ViewModel</code>s used by the <a href="../../../../dagger/hilt/android/lifecycle/HiltViewModelFactory.html" title="class in dagger.hilt.android.lifecycle"><code>HiltViewModelFactory</code></a>. It contains a default binding of the <code>SavedStateHandle</code> associated with the <code>ViewModel</code> that can be used
- by other dependencies provided by the component.
+ <p>This Hilt component is the source of <a href="../../../../dagger/hilt/android/lifecycle/HiltViewModel.html" title="annotation in dagger.hilt.android.lifecycle"><code>HiltViewModel</code></a>-annotated <code>ViewModel</code>s
+ used by the <a href="../../../../dagger/hilt/android/lifecycle/HiltViewModelFactory.html" title="class in dagger.hilt.android.lifecycle"><code>HiltViewModelFactory</code></a>. It contains a default
+ binding for the <code>SavedStateHandle</code> associated with the <code>ViewModel</code> that can be used by other dependencies provided by the component.
 
  <p>Dependencies available in the <a href="../../../../dagger/hilt/components/SingletonComponent.html" title="interface in dagger.hilt.components"><code>SingletonComponent</code></a> and <a href="../../../../dagger/hilt/android/components/ActivityRetainedComponent.html" title="interface in dagger.hilt.android.components"><code>ActivityRetainedComponent</code></a> are also available in this component since it is a child of <code>ActivityRetainedComponent</code>.
 
@@ -117,10 +118,10 @@
 
  <p>Dependencies in the <code>ViewModelComponent</code> can be scoped using the <a href="../../../../dagger/hilt/android/scopes/ViewModelScoped.html" title="annotation in dagger.hilt.android.scopes"><code>ViewModelScoped</code></a>
  annotation. This allows for a single instance of a dependency to be provided across the
- dependencies of a single <a href="../../../../dagger/hilt/android/lifecycle/ViewModelInject.html" title="annotation in dagger.hilt.android.lifecycle"><code>ViewModelInject</code></a>-annotated <code>ViewModel</code>.</div>
+ dependencies of a single <a href="../../../../dagger/hilt/android/lifecycle/HiltViewModel.html" title="annotation in dagger.hilt.android.lifecycle"><code>HiltViewModel</code></a>-annotated <code>ViewModel</code>.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../dagger/hilt/android/lifecycle/ViewModelInject.html" title="annotation in dagger.hilt.android.lifecycle"><code>ViewModelInject</code></a>, 
+<dd><a href="../../../../dagger/hilt/android/lifecycle/HiltViewModel.html" title="annotation in dagger.hilt.android.lifecycle"><code>HiltViewModel</code></a>, 
 <a href="../../../../dagger/hilt/android/scopes/ViewModelScoped.html" title="annotation in dagger.hilt.android.scopes"><code>ViewModelScoped</code></a></dd>
 </dl>
 </li>

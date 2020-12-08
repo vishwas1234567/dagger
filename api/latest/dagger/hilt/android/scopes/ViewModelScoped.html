@@ -98,7 +98,7 @@ public @interface <span class="memberNameLabel">ViewModelScoped</span></pre>
 <div class="block">Scope annotation for bindings that should exist for the life of a a single <code>ViewModel</code>.
 
  <p>Use this scope annotation when you want to define a dependency in the <a href="../../../../dagger/hilt/android/components/ViewModelComponent.html" title="interface in dagger.hilt.android.components"><code>ViewModelComponent</code></a> for which a single instance will be provided
- across all other dependencies for a single <a href="../../../../dagger/hilt/android/lifecycle/ViewModelInject.html" title="annotation in dagger.hilt.android.lifecycle"><code>ViewModelInject</code></a>-annotated <code>ViewModel</code>. Other <code>ViewModel</code>s that request the scoped dependency will receive a different instance. For sharing the
+ across all other dependencies for a single <a href="../../../../dagger/hilt/android/lifecycle/HiltViewModel.html" title="annotation in dagger.hilt.android.lifecycle"><code>HiltViewModel</code></a>-annotated <code>ViewModel</code>. Other <code>ViewModel</code>s that request the scoped dependency will receive a different instance. For sharing the
  same instance of a dependency across all <code>ViewModel</code>s use a scope from one of the parent
  components of <code>dagger.hilt.android.components.ViewModelComponent</code>, such as <code>Singleton</code> or <a href="../../../../dagger/hilt/android/scopes/ActivityRetainedScoped.html" title="annotation in dagger.hilt.android.scopes"><code>ActivityRetainedScoped</code></a>.
 
@@ -127,8 +127,9 @@ public @interface <span class="memberNameLabel">ViewModelScoped</span></pre>
      }
  }
 
+ &#64;HiltViewModel
  public class MovieViewModel extends ViewModel {
-     &#64;ViewModelInject
+     &#64;Inject
      public MovieViewModel(MovieDetailFetcher detailFetcher, MoviePosterFetcher posterFetcher) {
          // Both detailFetcher and posterFetcher will contain the same instance of
          // the MovieRepository.
@@ -137,7 +138,7 @@ public @interface <span class="memberNameLabel">ViewModelScoped</span></pre>
  </pre></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../dagger/hilt/android/lifecycle/ViewModelInject.html" title="annotation in dagger.hilt.android.lifecycle"><code>ViewModelInject</code></a>, 
+<dd><a href="../../../../dagger/hilt/android/lifecycle/HiltViewModel.html" title="annotation in dagger.hilt.android.lifecycle"><code>HiltViewModel</code></a>, 
 <a href="../../../../dagger/hilt/android/components/ViewModelComponent.html" title="interface in dagger.hilt.android.components"><code>ViewModelComponent</code></a></dd>
 </dl>
 </li>
