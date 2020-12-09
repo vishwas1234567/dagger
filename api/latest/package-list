@@ -2,6 +2,7 @@ dagger
 dagger.android
 dagger.android.internal
 dagger.android.support
+dagger.assisted
 dagger.grpc.server
 dagger.grpc.server.processor
 dagger.hilt
