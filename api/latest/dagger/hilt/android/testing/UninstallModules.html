@@ -109,7 +109,7 @@ public @interface <span class="memberNameLabel">UninstallModules</span></pre>
    })
    public class MyTest {
       @Module
-      @InstallIn(ApplicationComponent.class)
+      @InstallIn(SingletonComponent.class)
      interface FakeFooModule {
         @Binds Foo bindFoo(FakeFoo fakeFoo);
      }

@@ -103,7 +103,7 @@ public @interface <span class="memberNameLabel">InstallIn</span></pre>
 
  <pre><code>
     @Module
-    @InstallIn(ApplicationComponent.class)
+    @InstallIn(SingletonComponent.class)
    public final class FooModule {
       @Provides
      static Foo provideFoo() {
