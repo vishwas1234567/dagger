@@ -132,7 +132,12 @@ class FooTest {
     @Inject Foo foo;
   }
 
+  // Create the activity through standard testing APIs and get an
+  // instance as testActivity. Make sure the activity has gone through
+  // onCreate()
   ...
+
+  // Now just access the foo which has been injected on the activity directly
   Foo foo = testActivity.foo;
 }
 ```
@@ -145,7 +150,12 @@ class FooTest {
     @Inject lateinit var foo: Foo
   }
 
+  // Create the activity through standard testing APIs and get an
+  // instance as testActivity. Make sure the activity has gone through
+  // onCreate()
   ...
+
+  // Now just access the foo which has been injected on the activity directly
   val foo = testActivity.foo
 }
 ```
