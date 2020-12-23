@@ -356,7 +356,7 @@ class FooTest {
   ...
   @BindValue
   @JvmField
-  val fakeBar: Bar = new FakeBar()
+  val fakeBar: Bar = FakeBar()
 }
 ```
 {: .c-codeselector__code .c-codeselector__code_kotlin }
@@ -413,7 +413,7 @@ class FooTest {
   ...
   @BindValue
   @JvmField
-  val fakeFoo: Foo = new FakeFoo()
+  val fakeFoo: Foo = FakeFoo()
 }
 ```
 {: .c-codeselector__code .c-codeselector__code_kotlin }
