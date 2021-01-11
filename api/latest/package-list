@@ -16,6 +16,7 @@ dagger.hilt.android.testing
 dagger.hilt.codegen
 dagger.hilt.components
 dagger.hilt.migration
+dagger.hilt.testing
 dagger.multibindings
 dagger.producers
 dagger.producers.monitoring
