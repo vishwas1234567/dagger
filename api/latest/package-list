@@ -17,6 +17,7 @@ dagger.hilt.codegen
 dagger.hilt.components
 dagger.hilt.migration
 dagger.hilt.testing
+dagger.model
 dagger.multibindings
 dagger.producers
 dagger.producers.monitoring
