@@ -53,6 +53,9 @@ nav:
             name: Producers
             url: /producers
         - item:
+            name: Assisted Injection
+            url: /assisted-injection
+        - item:
             name: Testing
             url: /testing
         - item:
