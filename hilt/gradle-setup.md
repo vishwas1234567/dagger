@@ -130,10 +130,11 @@ class MyApplication : MultiDexApplication()
 
 ### Local test configuration {#gradle-plugin-local-tests}
 
-By default, the plugin will transform *instrumented* test classes (usually
-located in the `androidTest` source folder), but an additional configuration is
-required for the plugin to transform *local jvm* tests (usually located in
-the `test` source folder).
+When the Android Gradle plugin version used in the project is less than 4.2,
+then the Hilt Gradle plugin by default, will only transform *instrumented* test
+classes (usually located in the `androidTest` source folder), but an additional
+configuration is required for the plugin to transform *local jvm* tests (usually
+located in the `test` source folder).
 
 To enable transforming `@AndroidEntryPoint` classes in local jvm tests, apply
 the following configuration in your module's `build.gradle`:
@@ -201,3 +202,32 @@ javaCompileOptions {
 If the `+` is missing and `arguments` are overridden, it is likely Hilt will
 fail to compile with errors like the following: `Expected @HiltAndroidApp to
 have a value. Did you forget to apply the Gradle Plugin?`
+
+### Classpath Aggregation {#classpath-aggregation}
+
+The Hilt Gradle plugin also offers an experimental option for configuring the
+the compile classpath for annotation processing such that Hilt and Dagger are
+able to traverse and inspect classes across the modules dependency graph.
+Specifically this allows `@InstallIn` modules and `@EntryPoint` interfaces to
+be correctly discovered and aggregated into the 'root' module in a multi-module
+project. With this option enabled, module dependencies don't have to be
+relaxed from `implementation`  to `api`. Note that this option might have a
+build performance impact due to an increase in compilation classpath.
+For more context see issues
+[#1991](https://github.com/google/dagger/issues/1991) and
+[#970](https://github.com/google/dagger/issues/970).
+
+To enable classpath aggregation, apply the following configuration in your
+Android module's `build.gradle`:
+
+```
+hilt {
+    enableExperimentalClasspathAggregation = true
+}
+```
+
+**Warning:** If the Android Gradle plugin version used in the project is less
+than 7.0 then `android.lintOptions.checkReleaseBuilds` has to be set to `false`
+when `enableExperimentalClasspathAggregation` is set to `true` due to an
+existing bug in prior versions of AGP.
+{: .c-callouts__warning }
