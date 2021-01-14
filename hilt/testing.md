@@ -273,14 +273,142 @@ fragment to be contained in a Hilt activity. One workaround for this is to
 launch a Hilt activity and then attach your fragment.
 {: .c-callouts__warning }
 
-## Adding bindings
+## Replacing bindings
 
-A test may need to provision additional Dagger bindings that are not included in
-the production build of the application. In addition, tests may need to
-provision the same binding with different values per test. This section
-describes how to provision bindings for a test using Hilt.
+It's often useful for tests to be able to replace a production binding with a
+fake or mock binding to make tests more hermetic or easier to control in test.
+The next sections describe some ways to accomplish this in Hilt.
 
-### Nested modules {#nested-modules}
+### @TestInstallIn {#testinstallin}
+
+A Dagger module annotated with [`@TestInstallIn`] allows users to replace an
+existing [`@InstallIn`] module for all tests in a given source set. For example,
+suppose we want to replace `ProdDataServiceModule` with `FakeDataServiceModule`.
+We can accomplish this by annotating `FakeDataServiceModule` with
+`@TestInstallIn`, as shown below:
+
+<div class="c-codeselector__button c-codeselector__button_java">Java</div>
+<div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
+```java
+@Module
+@TestInstallIn(
+    components = SingletonComponent.class,
+    replaces = ProdDataServiceModule.class)
+interface FakeDataServiceModule {
+  @Binds DataService bind(FakeDataService impl);
+}
+```
+{: .c-codeselector__code .c-codeselector__code_java }
+
+```kotlin
+@Module
+@TestInstallIn(
+    components = SingletonComponent::class,
+    replaces = ProdDataServiceModule::class)
+interface FakeDataServiceModule {
+  @Binds fun bind(impl: FakeDataService): DataService
+}
+```
+{: .c-codeselector__code .c-codeselector__code_kotlin }
+
+A `@TestInstallIn` module can be included in the same source set as your test
+sources, as shown below:
+
+```
+:foo
+  |_ srcs/test/java/my/project/foo
+      |_ FooTest.java
+      |_ BarTest.java
+      |_ FakeDataServiceModule.java
+```
+
+However, if a particular `@TestInstallIn` module is needed in multiple Gradle
+modules, we recommend putting it in its own Gradle module (usually the same
+one as the fake), as shown below:
+
+```
+:dataservice-testing
+  |_ srcs/main/java/my/project/dataservice/testing
+      |_ FakeDataService.java
+      |_ FakeDataServiceModule.java
+
+// This depends on `testImplementation project(":dataservice-testing")`
+:foo/build.gradle
+
+// This depends on `testImplementation project(":dataservice-testing")`
+:bar/build.gradle
+```
+
+Putting the `@TestInstallIn` in the same Gradle module as the fake has a number
+of benefits. First, it ensures that all clients that depend on the fake properly
+replace the production module with the test module. It also avoids duplicating
+`FakeDataServiceModule` for every Gradle module that needs it.
+
+Note that `@TestInstallIn` applies to all tests in a given source set. For cases
+where an individual test needs to replace a binding that is specific to the
+given test, the test can either be moved into its own source set, or it can use
+Hilt testing features such as [`@UninstallModules`](#uninstall-modules),
+[`@BindValue`](#bind-value), and [nested `@InstallIn` modules](#nested-modules)
+to replace bindings specific to that test. These features will be described in
+more detail in the following sections.
+
+### @UninstallModules {#uninstall-modules}
+
+**Warning**:Test classes that use `@UninstallModules`, `@BindValue`, or nested
+`@InstallIn` modules result in a custom component being generated for that test.
+While this may be fine in most cases, it does have an impact on build speed. The
+recommended approach is to use [`@TestInstallIn`
+modules](#testinstallin) instead.
+{: .c-callouts__warning }
+
+A test annotated with [`@UninstallModules`] can uninstall production
+`@InstallIn` modules for that particular test (unlike `@TestInstallIn`, it has
+no effect on other tests). Once a module is uninstalled, the test can install
+new, test-specific bindings for that particular test.
+
+<div class="c-codeselector__button c-codeselector__button_java">Java</div>
+<div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
+```java
+@UninstallModules(ProdFooModule.class)
+@HiltAndroidTest
+public class FooTest {
+  // ... Install a new binding for Foo
+}
+```
+{: .c-codeselector__code .c-codeselector__code_java }
+
+```kotlin
+@UninstallModules(ProdFooModule::class)
+@HiltAndroidTest
+class FooTest {
+  // ... Install a new binding for Foo
+}
+```
+{: .c-codeselector__code .c-codeselector__code_kotlin }
+
+There are two ways to install a new binding for a particular test:
+
+  * Add an `@InstallIn` module nested within the test that provides the binding.
+  * Add an `@BindValue` field within the test that provides the binding.
+
+These two approaches are described in more detail in the next sections.
+
+**Note:** `@UninstallModules` can only uninstall `@InstallIn` modules, not
+`@TestInstallIn` modules. If a `@TestInstallIn` module needs to be uninstalled
+the module must be split into two separate modules: a `@TestInstallIn` module
+that replaces the production module with no bindings (i.e. only removes the
+production module), and a `@InstallIn` module that provides the standard fake
+so that `@UninstallModules` can uninstall the provided fake.
+{: .c-callouts__note }
+
+### Nested @InstallIn modules {#nested-modules}
+
+**Warning**:Test classes that use `@UninstallModules`, `@BindValue`, or nested
+`@InstallIn` modules result in a custom component being generated for that test.
+While this may be fine in most cases, it does have an impact on build speed. The
+recommended approach is to use [`@TestInstallIn`
+modules](#testinstallin) instead.
+{: .c-callouts__warning }
 
 Normally, `@InstallIn` modules are installed in the Hilt components of every
 test. However, if a binding needs to be installed only in a particular test,
@@ -331,6 +459,13 @@ In addition to static nested `@InstallIn` modules, Hilt also supports inner
 
 ### @BindValue {#bind-value}
 
+**Warning**:Test classes that use `@UninstallModules`, `@BindValue`, or nested
+`@InstallIn` modules result in a custom component being generated for that test.
+While this may be fine in most cases, it does have an impact on build speed. The
+recommended approach is to use [`@TestInstallIn`
+modules](#testinstallin) instead.
+{: .c-callouts__warning }
+
 For simple bindings, especially those that need to also be accessed in the test
 methods, Hilt provides a convenience annotation to avoid the boilerplate of
 creating a module and method normally required to provision a binding.
@@ -374,54 +509,13 @@ support [`@IntoSet`], [`@ElementsIntoSet`], and [`@IntoMap`] respectively. (Note
 that `@BindValueIntoMap` requires the field to also be annotated with a map key
 annotation.)
 
-### Caveats
-
-Be careful when using [`@BindValue`](#bind-value) or
+**Warning**:Be careful when using [`@BindValue`](#bind-value) or
 [non-static inner modules](#nested-modules) with `ActivityScenarioRule`.
 `ActivityScenarioRule` creates the activity before calling the `@Before` method,
 so if an `@BindValue` field is initialized in `@Before` (or later), then it's
 possible for the Activity to inject the binding in its unitialized state. To
 avoid this, try initializing the `@BindValue` field in the field's initializer.
-
-## Replacing bindings
-
-### @UninstallModules {#uninstall-modules}
-
-A common use case within tests is the need to replace a production binding with
-test binding, e.g. a fake or mock. Within a Hilt test, a production binding can
-be replaced by first uninstalling the production module it's contained in using
-[`@UninstallModules`], then provisioning a new binding from within the test.
-
-<div class="c-codeselector__button c-codeselector__button_java">Java</div>
-<div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
-```java
-@UninstallModules(ProdFooModule.class)
-@HiltAndroidTest
-public class FooTest {
-
-  ...
-  @BindValue Foo fakeFoo = new FakeFoo();
-}
-```
-{: .c-codeselector__code .c-codeselector__code_java }
-
-```kotlin
-@UninstallModules(ProdFooModule::class)
-@HiltAndroidTest
-class FooTest {
-
-  ...
-  @BindValue
-  @JvmField
-  val fakeFoo: Foo = FakeFoo()
-}
-```
-{: .c-codeselector__code .c-codeselector__code_kotlin }
-
-Note that `@UninstallModules` is equivalent to removing the `@InstallIn`
-annotation from that module with respect to the given test. Hilt does not
-directly support uninstalling individual bindings, but it's effectively possible
-by only including a single binding in a given module.
+{: .c-callouts__warning }
 
 ## Custom test application
 
@@ -539,3 +633,5 @@ class FooTest {
 [`@IntoSet`]: https://dagger.dev/api/latest/dagger/multibindings/IntoSet.html
 [`@IntoMap`]: https://dagger.dev/api/latest/dagger/multibindings/IntoMap.html
 [`@ElementsIntoSet`]: https://dagger.dev/api/latest/dagger/multibindings/ElementsIntoSet.html
+[`@InstallIn`]: https://dagger.dev/api/latest/dagger/hilt/InstallIn.html
+[`@TestInstallIn`]: https://dagger.dev/api/latest/dagger/hilt/testing/TestInstallIn.html
