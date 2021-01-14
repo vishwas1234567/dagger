@@ -30,25 +30,21 @@ only be scoped with `@ActivityScoped`.
 
 ![Hilt Component Hierarchy](component-hierarchy.svg)
 
-## Component members injection
+## Components used for injection
 
-The [`@AndroidEntryPoint`](android-entry-point.md) section shows how to inject
-your Android classes using members injection. The Hilt components are the ones
-responsible for injecting their bindings into your Android classes. Each
-component is responsible for injecting a different type of Android class. This
-is shown in the table below:
+When using Hilt APIs like [`@AndroidEntryPoint`](android-entry-point.md) to inject your Android classes, the standard Hilt components are used as the injectors.
+The component used as the injector will determine which bindings are visible to that Android class. The components used
+are shown in the table below:
 
 Component                       | Injector for
 ------------------------------- | ----------------------------------------
 **`SingletonComponent`**        | `Application`
-**`ActivityRetainedComponent`** | `ViewModel` (see [View model extension])
+**`ViewModelComponent`**        | `ViewModel`
 **`ActivityComponent`**         | `Activity`
 **`FragmentComponent`**         | `Fragment`
 **`ViewComponent`**             | `View`
 **`ViewWithFragmentComponent`** | `View` with `@WithFragmentBindings`
 **`ServiceComponent`**          | `Service`
-
-[View model extension]: https://developer.android.com/training/dependency-injection/hilt-jetpack
 
 ## Component lifetimes
 
@@ -64,15 +60,16 @@ Component lifetimes are generally bounded by the creation and destruction of a
 corresponding instance of an Android class. The table below lists the scope
 annotation and bounded lifetime for each component.
 
-Component                       | Scope                    | Created at                | Destroyed at
-------------------------------- | ------------------------ | ------------------------- | ------------
-**`SingletonComponent`**        | `@Singleton`             | `Application#onCreate()`  | `Application#onDestroy()`
-**`ActivityRetainedComponent`** | `@ActivityRetainedScope` | `Activity#onCreate()`[^1] | `Activity#onDestroy()`[^1]
-**`ActivityComponent`**         | `@ActivityScoped`        | `Activity#onCreate()`     | `Activity#onDestroy()`
-**`FragmentComponent`**         | `@FragmentScoped`        | `Fragment#onAttach()`     | `Fragment#onDestroy()`
-**`ViewComponent`**             | `@ViewScoped`            | `View#super()`            | `View` destroyed
-**`ViewWithFragmentComponent`** | `@ViewScoped`            | `View#super()`            | `View` destroyed
-**`ServiceComponent`**          | `@ServiceScoped`         | `Service#onCreate()`      | `Service#onDestroy()`
+Component                       | Scope                     | Created at                | Destroyed at
+------------------------------- | ------------------------- | ------------------------- | ------------
+**`SingletonComponent`**        | `@Singleton`              | `Application#onCreate()`  | `Application#onDestroy()`
+**`ActivityRetainedComponent`** | `@ActivityRetainedScoped` | `Activity#onCreate()`[^1] | `Activity#onDestroy()`[^1]
+**`ViewModelComponent`**        | `@ViewModelScoped`        | `ViewModel` created       | `ViewModel` destroyed
+**`ActivityComponent`**         | `@ActivityScoped`         | `Activity#onCreate()`     | `Activity#onDestroy()`
+**`FragmentComponent`**         | `@FragmentScoped`         | `Fragment#onAttach()`     | `Fragment#onDestroy()`
+**`ViewComponent`**             | `@ViewScoped`             | `View#super()`            | `View` destroyed
+**`ViewWithFragmentComponent`** | `@ViewScoped`             | `View#super()`            | `View` destroyed
+**`ServiceComponent`**          | `@ServiceScoped`          | `Service#onCreate()`      | `Service#onDestroy()`
 
 [^1]: `ActivityRetainedComponent` lives across configuration changes, so it is
     created at the first onCreate and last onDestroy.
@@ -198,6 +195,7 @@ Component                       | Default Bindings
 ------------------------------- | ---------------------------------------------
 **`SingletonComponent`**        | `Application`[^2]
 **`ActivityRetainedComponent`** | `Application`
+**`ViewModelComponent`**        | `SavedStateHandle`
 **`ActivityComponent`**         | `Application`, `Activity`
 **`FragmentComponent`**         | `Application`, `Activity`, `Fragment`
 **`ViewComponent`**             | `Application`, `Activity`, `View`

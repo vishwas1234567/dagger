@@ -154,10 +154,9 @@ annotation. You can use `@AndroidEntryPoint` on the following types:
 1.  Service
 1.  BroadcastReceiver
 
-ViewModels are not directly supported, but are instead supported by a
-[Jetpack extension](https://developer.android.com/training/dependency-injection/hilt-jetpack).
-The following example shows how to add the annotation to an activity, but the
-process is the same for other types.
+Note that ViewModels are supported via a separate API
+[`@HiltViewModel`](view-model.md). The following example shows how to add the
+annotation to an activity, but the process is the same for other types.
 
 To enable members injection in your activity, annotate your class with
 [`@AndroidEntryPoint`](https://dagger.dev/api/latest/dagger/hilt/android/AndroidEntryPoint.html).

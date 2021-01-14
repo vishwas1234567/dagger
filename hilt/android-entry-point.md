@@ -21,11 +21,10 @@ annotation. You can use `@AndroidEntryPoint` on the following types:
 1.  Service
 1.  BroadcastReceiver[^1]
 
-ViewModels are not directly supported, but are instead supported by a
-[Jetpack extension](https://developer.android.com/training/dependency-injection/hilt-jetpack).
-ContentProviders are not directly supported due to their `onCreate` being called
-at startup, but you can access dependencies via an
-[entry point](entry-points.md).
+Note that ViewModels are supported via a separate API
+[`@HiltViewModel`](view-model.md). ContentProviders are not directly supported
+due to their `onCreate` being called at startup, but you can access dependencies
+via an [entry point](entry-points.md).
 
 The following example shows how to add the annotation to an activity, but the
 process is the same for other types.
