@@ -102,6 +102,9 @@ nav:
                   name: "Android Entry Points"
                   url: /android-entry-point
               - item:
+                  name: "View Models"
+                  url: /view-model
+              - item:
                   name: "Modules"
                   url: /modules
               - item:
