@@ -206,16 +206,24 @@ have a value. Did you forget to apply the Gradle Plugin?`
 ### Classpath Aggregation {#classpath-aggregation}
 
 The Hilt Gradle plugin also offers an experimental option for configuring the
-the compile classpath for annotation processing such that Hilt and Dagger are
-able to traverse and inspect classes across the modules dependency graph.
-Specifically this allows `@InstallIn` modules and `@EntryPoint` interfaces to
-be correctly discovered and aggregated into the 'root' module in a multi-module
-project. With this option enabled, module dependencies don't have to be
-relaxed from `implementation`  to `api`. Note that this option might have a
-build performance impact due to an increase in compilation classpath.
-For more context see issues
+compile classpath for annotation processing such that Hilt and Dagger are able
+to traverse and inspect classes across all transitive dependencies from within
+the application Gradle module. We recommend enabling this option because without
+it, an `implementation` dependency may drop important information about
+`@InstallIn` modules or `@EntryPoint` interfaces from the compile classpath.
+This can lead to subtle and/or confusing errors, that in the case of
+multibindings may only manifest at runtime. With this option enabled,
+`implementation` dependencies don't have to be relaxed to `api`. Note that this
+option might have a build performance impact due to an increase in compilation
+classpath. For more context on the problems this solves, see issues
 [#1991](https://github.com/google/dagger/issues/1991) and
 [#970](https://github.com/google/dagger/issues/970).
+
+**Warning:** If the Android Gradle plugin version used in the project is less
+than 7.0 then `android.lintOptions.checkReleaseBuilds` has to be set to `false`
+when `enableExperimentalClasspathAggregation` is set to `true` due to an
+existing bug in prior versions of AGP.
+{: .c-callouts__warning }
 
 To enable classpath aggregation, apply the following configuration in your
 Android module's `build.gradle`:
@@ -226,8 +234,3 @@ hilt {
 }
 ```
 
-**Warning:** If the Android Gradle plugin version used in the project is less
-than 7.0 then `android.lintOptions.checkReleaseBuilds` has to be set to `false`
-when `enableExperimentalClasspathAggregation` is set to `true` due to an
-existing bug in prior versions of AGP.
-{: .c-callouts__warning }
