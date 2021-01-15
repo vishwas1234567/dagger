@@ -97,7 +97,7 @@ will forward the values to the [`initOptions()`] method.
 [BindingGraph javadoc]: https://dagger.dev/api/latest/dagger/model/BindingGraph.html
 [`BindingGraphPlugin`]: https://dagger.dev/api/latest/dagger/spi/BindingGraphPlugin.html
 [component nodes]: https://dagger.dev/api/latest/dagger/model/BindingGraph.ComponentNode.html
-[dependency edges]: https://dagger.dev/api/latest/dagger/model/DependencyEdge.html
+[dependency edges]: https://dagger.dev/api/latest/dagger/model/BindingGraph.DependencyEdge.html
 [`DiagnosticReporter`]: https://dagger.dev/api/latest/dagger/spi/DiagnosticReporter.html
 [`Filer`]: https://docs.oracle.com/javase/9/docs/api/javax/annotation/processing/Filer.html
 [full binding graph validation]: compiler-options.md#full-binding-graph-validation
@@ -109,7 +109,7 @@ will forward the values to the [`initOptions()`] method.
 [`isFullBindingGraph()`]: https://dagger.dev/api/latest/dagger/model/BindingGraph.html#isFullBindingGraph--
 [`java_plugin`]: https://docs.bazel.build/versions/master/be/java.html#java_plugin
 [`Messager`]: https://docs.oracle.com/javase/9/docs/api/javax/annotation/processing/Messager.html
-[missing binding nodes]: https://dagger.dev/api/latest/dagger/model/MissingBinding.html
+[missing binding nodes]: https://dagger.dev/api/latest/dagger/model/BindingGraph.MissingBinding.html
 [`Network`]: https://guava.dev/releases/27.0-jre/api/docs/com/google/common/graph/Network.html
 [`pluginName()`]: https://dagger.dev/api/latest/dagger/spi/BindingGraphPlugin.html#pluginName--
 [reach out]: https://github.com/google/dagger/issues/new
