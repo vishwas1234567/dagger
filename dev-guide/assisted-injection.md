@@ -7,7 +7,7 @@ redirect_from:
 
 Assisted injection is a dependency injection (DI) pattern that is used to
 construct an object where some parameters may be provided by the DI framework
-and others must be passed in at at creation time (a.k.a "assisted") by the user.
+and others must be passed in at creation time (a.k.a "assisted") by the user.
 
 A factory is typically responsible for combining all of the parameters and
 creating the object.
