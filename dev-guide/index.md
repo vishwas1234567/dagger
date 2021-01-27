@@ -134,7 +134,7 @@ method to define the alias. Unlike `@Provides`, an `@Binds` method is abstract,
 and has no implementation:
 
 ```java
-@Binds abstract Heater bindHeater(ElectricHeater impl);
+@Binds Heater bindHeater(ElectricHeater impl);
 ```
 
 **Note**: Using `@Binds` is the preferred way to define an alias because Dagger only
@@ -148,7 +148,7 @@ that have an [`@Module`][Module] annotation.
 ```java
 @Module
 interface HeaterModule {
-  @Binds abstract Heater bindHeater(ElectricHeater impl);
+  @Binds Heater bindHeater(ElectricHeater impl);
 }
 ```
 

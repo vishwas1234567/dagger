@@ -61,7 +61,7 @@ The examples throughout the docs will assume usage of the plugin. To configure
 the Hilt Gradle plugin first declare the dependency in your project's root
 `build.gradle` file:
 
-<!-- TODO(user): Add .kts (kotlin scripting) code blocks. -->
+<!-- TODO(danysantiago): Add .kts (kotlin scripting) code blocks. -->
 
 ```groovy
 buildscript {
