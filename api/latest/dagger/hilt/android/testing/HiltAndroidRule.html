@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -161,8 +161,22 @@ implements org.junit.rules.TestRule</pre>
      org.junit.runner.Description&nbsp;description)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--">componentReady</a></span>()</code>
+<div class="block">Completes Dagger component creation if <code>delayComponentReady</code> was used.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#delayComponentReady--">delayComponentReady</a></span>()</code>
+<div class="block">Delays creating the component until <a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--"><code>componentReady()</code></a> is called.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#inject--">inject</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#inject--">inject</a></span>()</code>
+<div class="block">Completes Dagger injection.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -221,10 +235,47 @@ implements org.junit.rules.TestRule</pre>
 <a name="inject--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>inject</h4>
 <pre>public&nbsp;void&nbsp;inject()</pre>
+<div class="block">Completes Dagger injection. Must be called before accessing inject types. Must be called after
+ any non-static test module have been added. If <a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#delayComponentReady--"><code>delayComponentReady()</code></a> was used, this must
+ be called after <a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--"><code>componentReady()</code></a>.</div>
+</li>
+</ul>
+<a name="delayComponentReady--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>delayComponentReady</h4>
+<pre>public&nbsp;<a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a>&nbsp;delayComponentReady()</pre>
+<div class="block">Delays creating the component until <a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--"><code>componentReady()</code></a> is called. This is only necessary
+ in the case that a dynamically bound value (e.g. configuring an @BindValue field in @Before
+ or @Test method) is requested before test case execution begins.
+
+ <p>Examples of early binding requests include an Activity launched by a test rule, or an entry
+ points in a <a href="../../../../dagger/hilt/android/testing/OnComponentReadyRunner.html" title="class in dagger.hilt.android.testing"><code>OnComponentReadyRunner</code></a>.
+
+ <p>If this method is called, <a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--"><code>componentReady()</code></a> must be called before the test case
+ finishes.</div>
+</li>
+</ul>
+<a name="componentReady--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>componentReady</h4>
+<pre>public&nbsp;<a href="../../../../dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a>&nbsp;componentReady()</pre>
+<div class="block">Completes Dagger component creation if <code>delayComponentReady</code> was used. Binds the current
+ value of <a href="../../../../dagger/hilt/android/testing/BindValue.html" title="annotation in dagger.hilt.android.testing"><code>BindValue</code></a> fields. Normally this happens automatically. This method may only be
+ called if <code>delayComponentReady</code> was used to delay value binding.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an instance of the test rule for chaining</dd>
+</dl>
 </li>
 </ul>
 </li>

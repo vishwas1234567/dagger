@@ -464,6 +464,10 @@
 </dd>
 <dt><span class="memberNameLink"><a href="dagger/model/ComponentPath.html#ComponentPath--">ComponentPath()</a></span> - Constructor for class dagger.model.<a href="dagger/model/ComponentPath.html" title="class in dagger.model">ComponentPath</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--">componentReady()</a></span> - Method in class dagger.hilt.android.testing.<a href="dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a></dt>
+<dd>
+<div class="block">Completes Dagger component creation if <code>delayComponentReady</code> was used.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="dagger/model/ComponentPath.html#components--">components()</a></span> - Method in class dagger.model.<a href="dagger/model/ComponentPath.html" title="class in dagger.model">ComponentPath</a></dt>
 <dd>
 <div class="block">Returns the component types, starting from the <a href="dagger/model/ComponentPath.html#rootComponent--">root
@@ -728,6 +732,10 @@
 <dt><a href="dagger/hilt/DefineComponent.Builder.html" title="annotation in dagger.hilt"><span class="typeNameLink">DefineComponent.Builder</span></a> - Annotation Type in <a href="dagger/hilt/package-summary.html">dagger.hilt</a></dt>
 <dd>
 <div class="block">Defines a builder for a Hilt component.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="dagger/hilt/android/testing/HiltAndroidRule.html#delayComponentReady--">delayComponentReady()</a></span> - Method in class dagger.hilt.android.testing.<a href="dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a></dt>
+<dd>
+<div class="block">Delays creating the component until <a href="dagger/hilt/android/testing/HiltAndroidRule.html#componentReady--"><code>HiltAndroidRule.componentReady()</code></a> is called.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="dagger/producers/monitoring/TimingRecorders.html#delegatingProductionComponentTimingRecorderFactory-java.util.Collection-">delegatingProductionComponentTimingRecorderFactory(Collection&lt;ProductionComponentTimingRecorder.Factory&gt;)</a></span> - Static method in class dagger.producers.monitoring.<a href="dagger/producers/monitoring/TimingRecorders.html" title="class in dagger.producers.monitoring">TimingRecorders</a></dt>
 <dd>
@@ -1071,7 +1079,9 @@
  otherwise throws an <code>IllegalArgumentException</code>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="dagger/hilt/android/testing/HiltAndroidRule.html#inject--">inject()</a></span> - Method in class dagger.hilt.android.testing.<a href="dagger/hilt/android/testing/HiltAndroidRule.html" title="class in dagger.hilt.android.testing">HiltAndroidRule</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Completes Dagger injection.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="dagger/MembersInjector.html#injectMembers-T-">injectMembers(T)</a></span> - Method in interface dagger.<a href="dagger/MembersInjector.html" title="interface in dagger">MembersInjector</a></dt>
 <dd>
 <div class="block">Injects dependencies into the fields and methods of <code>instance</code>.</div>
@@ -1665,7 +1675,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="dagger/model/Binding.html#requiresModuleInstance--">requiresModuleInstance()</a></span> - Method in interface dagger.model.<a href="dagger/model/Binding.html" title="interface in dagger.model">Binding</a></dt>
 <dd>
-<div class="block">Returns <code>true</code> if using this binding requires an instance of the <a href="dagger/model/Binding.html#contributingModule--"><code>Binding.contributingModule()</code></a>.</div>
+<div class="block">Returns <code>true</code> if using this binding requires an instance of the <a href="dagger/model/Binding.html#contributingModule--"><code>contributingModule()</code></a>.</div>
 </dd>
 <dt><a href="dagger/Reusable.html" title="annotation in dagger"><span class="typeNameLink">Reusable</span></a> - Annotation Type in <a href="dagger/package-summary.html">dagger</a></dt>
 <dd>
