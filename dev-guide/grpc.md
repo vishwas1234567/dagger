@@ -13,8 +13,7 @@ implementations.
 Dagger-gRPC is an extension to [Dagger] that lets you use Dagger to create
 applications that use gRPC.
 
-You can use Dagger-gRPC to create [servers](grpc-servers.md) or clients [note:
-client support is coming soon].
+You can use Dagger-gRPC to create [servers](grpc-servers.md).
 
 ## Call scope
 
