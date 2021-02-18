@@ -11,7 +11,6 @@ tutorial will guide you through bootstrapping an existing app to use Hilt.
 For more on the basic concepts of Hilt's components, check out
 [Hilt Components](components.md).
 
-
 ## Gradle vs non-Gradle users {#gradle-plugin}
 
 For Gradle users, the [Hilt Gradle plugin](gradle-setup.md#hilt-gradle-plugin)
