@@ -29,6 +29,7 @@ android_library(
     manifest = "AndroidManifest.xml",
     resource_files = glob(["res/**"]),
     deps = [
+        "@maven//:androidx_activity_activity",
         "@maven//:androidx_fragment_fragment",
         "@maven//:androidx_lifecycle_lifecycle_viewmodel",
         "@maven//:androidx_lifecycle_lifecycle_viewmodel_savedstate",
@@ -52,6 +53,7 @@ GenRobolectricTests(
         "//:android-support",
         "//:dagger_with_compiler",
         "@google_bazel_common//third_party/java/truth",
+        "@maven//:androidx_activity_activity",
         "@maven//:androidx_fragment_fragment",
         "@maven//:androidx_lifecycle_lifecycle_viewmodel",
         "@maven//:androidx_lifecycle_lifecycle_viewmodel_savedstate",

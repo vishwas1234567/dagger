@@ -41,6 +41,7 @@ android_library(
         "//:dagger_with_compiler",
         "//java/dagger/android",
         "@google_bazel_common//third_party/java/error_prone:annotations",
+        "@maven//:androidx_activity_activity",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_appcompat_appcompat",
         "@maven//:androidx_fragment_fragment",
