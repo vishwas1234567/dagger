@@ -92,7 +92,8 @@
 <li class="blockList">
 <hr>
 <br>
-<pre>@Retention(value=RUNTIME)
+<pre>@Beta
+ @Retention(value=RUNTIME)
  @Target(value=TYPE)
 public @interface <span class="memberNameLabel">EarlyEntryPoint</span></pre>
 <div class="block">An escape hatch for when a Hilt entry point usage needs to be called before the singleton
@@ -103,7 +104,10 @@ public @interface <span class="memberNameLabel">EarlyEntryPoint</span></pre>
 
  <h1>Usage:
 
- <p>To use, annotate an existing entry point with <a href="../../../dagger/hilt/android/EarlyEntryPoint.html" title="annotation in dagger.hilt.android"><code>EarlyEntryPoint</code></a> as shown below:
+ <p>To enable an existing entry point to be called early in a Hilt test, replace its
+ <a href="../../../dagger/hilt/EntryPoint.html" title="annotation in dagger.hilt"><code>EntryPoint</code></a> annotation with <a href="../../../dagger/hilt/android/EarlyEntryPoint.html" title="annotation in dagger.hilt.android"><code>EarlyEntryPoint</code></a>. (Note that,
+ <a href="../../../dagger/hilt/android/EarlyEntryPoint.html" title="annotation in dagger.hilt.android"><code>EarlyEntryPoint</code></a> is only allowed on entry points installed in the
+ <a href="../../../dagger/hilt/components/SingletonComponent.html" title="interface in dagger.hilt.components"><code>SingletonComponent</code></a>).
 
  <pre>{@code</div>
 </li>
