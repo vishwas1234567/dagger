@@ -21,7 +21,7 @@ readonly YML_CONFIG=$1
 readonly CWD=$(dirname $0)
 
 readonly LATEST_DAGGER_VERSION=$($CWD/latest-dagger-version.sh)
-readonly LATEST_HILT_VERSION="$LATEST_DAGGER_VERSION-alpha"
+readonly LATEST_HILT_VERSION="$LATEST_DAGGER_VERSION-beta"
 
 readonly YML_DAGGER_VERSION=$(yml-dagger-version $YML_CONFIG)
 readonly YML_HILT_VERSION=$(yml-hilt-version $YML_CONFIG)
