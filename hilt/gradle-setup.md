@@ -11,15 +11,15 @@ To use Hilt, add the following build dependencies to the Android Gradle module's
 ```groovy
 dependencies {
   implementation 'com.google.dagger:hilt-android:{{site.hiltVersion}}'
-  annotationProcessor 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  annotationProcessor 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 
   // For instrumentation tests
   androidTestImplementation  'com.google.dagger:hilt-android-testing:{{site.hiltVersion}}'
-  androidTestAnnotationProcessor 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  androidTestAnnotationProcessor 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 
   // For local unit tests
   testImplementation 'com.google.dagger:hilt-android-testing:{{site.hiltVersion}}'
-  testAnnotationProcessor 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  testAnnotationProcessor 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 }
 ```
 
@@ -36,15 +36,15 @@ to true.
 ```groovy
 dependencies {
   implementation 'com.google.dagger:hilt-android:{{site.hiltVersion}}'
-  kapt 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  kapt 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 
   // For instrumentation tests
   androidTestImplementation  'com.google.dagger:hilt-android-testing:{{site.hiltVersion}}'
-  kaptAndroidTest 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  kaptAndroidTest 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 
   // For local unit tests
   testImplementation 'com.google.dagger:hilt-android-testing:{{site.hiltVersion}}'
-  kaptTest 'com.google.dagger:hilt-android-compiler:{{site.hiltVersion}}'
+  kaptTest 'com.google.dagger:hilt-compiler:{{site.hiltVersion}}'
 }
 
 kapt {
