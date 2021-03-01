@@ -204,7 +204,7 @@ Now any binding annotated with [`@CallScoped`] will be used only once per call,
 with the bound object shared among all its dependent bindings.
 
 If you've installed [`GrpcCallMetadataModule`] onto the subcomponent, then
-you'll also be able to inject the [headers][`Metadata`] from the call into any
+you'll also be able to inject the [headers][`Metadata.Headers`] from the call into any
 binding in the subcomponent.
 
 You create and start the server in the same way as above.
