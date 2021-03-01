@@ -139,7 +139,7 @@ If you want to bind objects in a [scope] whose lifetime is the same as one gRPC
 
 1.  Instead of making your [`@Singleton`] component implement
     `HelloServiceDefinition`, create a subcomponent type that implements
-    `HelloServiceDefinition` and is in [`@CallScope`]. Install
+    `HelloServiceDefinition` and is in [`@CallScoped`]. Install
     `HelloGrpcServiceModule` into it. If you want bindings in that component to
     be able to depend on the gRPC [call metadata], then also install
     [`GrpcCallMetadataModule`].
@@ -200,7 +200,7 @@ If you want to bind objects in a [scope] whose lifetime is the same as one gRPC
     }
     ```
 
-Now any binding annotated with [`@CallScope`] will be used only once per call,
+Now any binding annotated with [`@CallScoped`] will be used only once per call,
 with the bound object shared among all its dependent bindings.
 
 If you've installed [`GrpcCallMetadataModule`] onto the subcomponent, then
@@ -211,19 +211,18 @@ You create and start the server in the same way as above.
 
 <!-- References -->
 
-[`AbstractServerBuilder`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/AbstractServerBuilder.java
-[call metadata]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/Metadata.java
-[`@CallScope`]: https://dagger.dev/api/latest/dagger/grpc/server/CallScope.html
+[call metadata]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/Metadata.java
+[`@CallScoped`]: https://dagger.dev/api/latest/dagger/grpc/server/CallScoped.html
 [`@ForGrpcService`]: https://dagger.dev/api/latest/dagger/grpc/server/ForGrpcService.html
 [`GrpcCallMetadataModule`]: https://dagger.dev/api/latest/dagger/grpc/server/GrpcCallMetadataModule.html
 [`@GrpcService`]: https://dagger.dev/api/latest/dagger/grpc/server/GrpcService.html
 [`@Inject`]: https://docs.oracle.com/javaee/7/api/javax/inject/Inject.html
-[`Metadata.Headers`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/Metadata.java
+[`Metadata.Headers`]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/Metadata.java
 [module]: https://dagger.dev/api/latest/dagger/Module.html
 [`NettyServerModule`]: https://dagger.dev/api/latest/dagger/grpc/server/NettyServerModule.html
 [scope]: https://docs.oracle.com/javaee/7/api/javax/inject/Scope.html
-[`Server`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/Server.java
-[`ServerCall`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/ServerCall.java
-[`ServerInterceptor`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/ServerInterceptor.java
-[`ServerServiceDefinition`]: https://github.com/grpc/grpc-java/blob/master/core/src/main/java/io/grpc/ServerServiceDefinition.java
+[`Server`]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/Server.java
+[`ServerCall`]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/ServerCall.java
+[`ServerInterceptor`]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/ServerInterceptor.java
+[`ServerServiceDefinition`]: https://github.com/grpc/grpc-java/blob/master/api/src/main/java/io/grpc/ServerServiceDefinition.java
 [`@Singleton`]: https://docs.oracle.com/javaee/7/api/javax/inject/Singleton.html
