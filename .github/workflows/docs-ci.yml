@@ -5,6 +5,8 @@ on:
     branches:
       - gh-pages
   pull_request:
+    branches:
+      - gh-pages
 
 defaults:
   run:
@@ -15,6 +17,12 @@ jobs:
     name: 'Validate Dagger version'
     runs-on: ubuntu-latest
     steps:
+      # Cancel previous runs on the same branch to avoid unnecessary parallel
+      # runs of the same job. See https://github.com/google/go-github/pull/1821
+      - name: Cancel previous
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
       - name: 'Check out repository'
         uses: actions/checkout@v2
       - name: 'Validate latest Dagger version'
