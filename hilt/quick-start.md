@@ -238,27 +238,23 @@ use `SingletonComponent`:
 
 <div class="c-codeselector__button c-codeselector__button_java">Java</div>
 <div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
-
 ```java
 @Module
 @InstallIn(SingletonComponent.class) // Installs FooModule in the generate SingletonComponent.
-final class FooModule {
+public final class FooModule {
   @Provides
   static Bar provideBar() {...}
 }
 ```
-
 {: .c-codeselector__code .c-codeselector__code_java }
-
 ```kotlin
 @Module
 @InstallIn(SingletonComponent::class) // Installs FooModule in the generate SingletonComponent.
-internal object FooModule {
+object FooModule {
   @Provides
   fun provideBar(): Bar {...}
 }
 ```
-
 {: .c-codeselector__code .c-codeselector__code_kotlin }
 
 For more details, see [Hilt Modules](modules.md).
