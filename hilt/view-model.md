@@ -101,10 +101,11 @@ such:
 
 <div class="c-codeselector__button c-codeselector__button_java">Java</div>
 <div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
+
 ```java
 @Module
 @InstallIn(ViewModelComponent.class)
-public final class ViewModelMovieModule {
+final class ViewModelMovieModule {
   @Provides
   @ViewModelScoped
   static MovieRepository provideRepo(SavedStateHandle handle) {
@@ -133,11 +134,13 @@ public final class MovieViewModel extends ViewModel {
   }
 }
 ```
+
 {: .c-codeselector__code .c-codeselector__code_java }
+
 ```kotlin
 @Module
 @InstallIn(ViewModelComponent::class)
-object ViewModelMovieModule {
+internal object ViewModelMovieModule {
   @Provides
   @ViewModelScoped
   fun provideRepo(handle: SavedStateHandle) =
@@ -163,4 +166,5 @@ class MovieViewModel @Inject constructor(
   }
 }
 ```
+
 {: .c-codeselector__code .c-codeselector__code_kotlin }
