@@ -462,6 +462,58 @@ When you have migrated all of the other dagger.android usages and are ready to
 remove this code, simply extend from `Application` and remove the overridden
 methods and the `DispatchingAndroidInjector` classes.
 
+<!-- TODO(bcorso): Add a whole separate section for "Migrating your tests"? -->
+### dagger.android Test Application
+
+If your application will be used in a Hilt test, then it's important to note
+that Hilt does not currently allow field injection in test applications.
+(See ["Early Entry Points"](early-entry-point.md#background) for more details).
+Thus, your test application cannot extend `DaggerApplication` since that class
+uses field injection under the hood. Instead, implement `HasAndroidInjector` and
+use an entry point to get the `DispatchingAndroidInjector`, as shown below:
+
+<div class="c-codeselector__button c-codeselector__button_java">Java</div>
+<div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
+```java
+// Generates TestApplication_Application
+@CustomTestApplication(BaseApplication.class)
+interface TestApplication {}
+
+abstract class BaseApplication extends Application implements HasAndroidInjector {
+  // Hilt test applications cannot use field injection, so you an entry point instead
+  @EntryPoint
+  @InstallIn(SingletonComponent.class)
+  interface InjectorEntryPoint {
+    DispatchingAndroidInjector<Object> dispatchingAndroidInjector();
+  }
+
+  @Override
+  public AndroidInjector<Object> androidInjector() {
+    return EntryPoints.get(this, InjectorEntryPoint.class).dispatchingAndroidInjector();
+  }
+}
+```
+{: .c-codeselector__code .c-codeselector__code_java }
+```kotlin
+// Generates TestApplication_Application
+@CustomTestApplication(BaseApplication.class)
+interface TestApplication {}
+
+abstract class BaseApplication: Application, HasAndroidInjector {
+  // Hilt test applications cannot use field injection, so you an entry point instead
+  @EntryPoint
+  @InstallIn(SingletonComponent::class)
+  interface InjectorEntryPoint {
+    fun dispatchingAndroidInjector(): DispatchingAndroidInjector<Object>
+  }
+
+  override fun androidInjector(): AndroidInjector<Object> {
+    return EntryPoints.get(this, InjectorEntryPoint::class).dispatchingAndroidInjector()
+  }
+}
+```
+{: .c-codeselector__code .c-codeselector__code_kotlin }
+
 ### Check your build
 
 You should be able to stop and build/run your app successfully at this point.
