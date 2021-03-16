@@ -43,7 +43,7 @@ use `SingletonComponent`:
 ```java
 @Module
 @InstallIn(SingletonComponent.class) // Installs FooModule in the generate SingletonComponent.
-public final class FooModule {
+final class FooModule {
   @Provides
   static Bar provideBar() {...}
 }
@@ -52,7 +52,7 @@ public final class FooModule {
 ```kotlin
 @Module
 @InstallIn(SingletonComponent::class) // Installs FooModule in the generate SingletonComponent.
-object FooModule {
+internal object FooModule {
   @Provides
   fun provideBar(): Bar {...}
 }

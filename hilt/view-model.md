@@ -104,7 +104,7 @@ such:
 ```java
 @Module
 @InstallIn(ViewModelComponent.class)
-public final class ViewModelMovieModule {
+final class ViewModelMovieModule {
   @Provides
   @ViewModelScoped
   static MovieRepository provideRepo(SavedStateHandle handle) {
@@ -137,7 +137,7 @@ public final class MovieViewModel extends ViewModel {
 ```kotlin
 @Module
 @InstallIn(ViewModelComponent::class)
-object ViewModelMovieModule {
+internal object ViewModelMovieModule {
   @Provides
   @ViewModelScoped
   fun provideRepo(handle: SavedStateHandle) =
