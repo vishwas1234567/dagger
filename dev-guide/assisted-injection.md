@@ -42,7 +42,7 @@ class MyDataService @AssistedInject constructor(
 
 Next, define a factory that can be used to create an instance of the object.
 The factory must be annotated with
-[`@AssistedFactory`](https://github.com/google/dagger/blob/master/java/dagger/assisted/AssistedFactoryjava)
+[`@AssistedFactory`](https://github.com/google/dagger/blob/master/java/dagger/assisted/AssistedFactory.java)
 and must contain an abstract method that returns the `@AssistedInject` type and
 takes in all `@Assisted` parameters defined in its constructor (in the same
 order). This is shown below:
