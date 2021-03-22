@@ -181,6 +181,7 @@ class FooTest {
 }
 ```
 {: .c-codeselector__code .c-codeselector__code_java }
+
 ```kotlin
 @HiltAndroidTest
 class FooTest {
@@ -238,6 +239,7 @@ test, you can get any `FragmentComponent` binding using an
 
 <div class="c-codeselector__button c-codeselector__button_java">Java</div>
 <div class="c-codeselector__button c-codeselector__button_kotlin">Kotlin</div>
+
 ```java
 @HiltAndroidTest
 class FooTest {
@@ -252,6 +254,7 @@ class FooTest {
 }
 ```
 {: .c-codeselector__code .c-codeselector__code_java }
+
 ```kotlin
 @HiltAndroidTest
 class FooTest {
