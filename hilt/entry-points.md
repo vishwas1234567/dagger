@@ -184,3 +184,9 @@ object FooModule {
 }
 ```
 {: .c-codeselector__code .c-codeselector__code_kotlin }
+
+## Visibility
+
+All types returned from an entry point's method **must be public.** This is
+because the generated Dagger component, which is often not in the same package,
+must implement the entry point method.
