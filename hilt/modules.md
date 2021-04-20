@@ -79,7 +79,7 @@ public final class FooModule {
 ```kotlin
 @Module
 @InstallIn(SingletonComponent::class)
-object class FooModule {
+object FooModule {
   // @Singleton providers are only called once per SingletonComponent instance.
   @Provides
   @Singleton
@@ -112,7 +112,7 @@ public final class FooModule {
 ```kotlin
 @Module
 @InstallIn(SingletonComponent::class)
-object class FooModule {
+object FooModule {
   // @InstallIn(SingletonComponent.class) module providers have access to
   // the Application binding.
   @Provides
