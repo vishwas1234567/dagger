@@ -25,4 +25,4 @@ SOURCE_7_TARGET_7 = [
     "1.7",
 ]
 
-POM_VERSION = "${project.version}"
+POM_VERSION = "2.35"
